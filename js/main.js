@@ -1,6 +1,8 @@
 let formularioFecha = document.getElementById("form_fechas");
 formularioFecha.onsubmit = validarFormulario;
 
+let yearBeginValidated = null;
+let yearEndValidated = null;
 
 function fechaFormateada (inputDate) {
     let newDate = new Date(inputDate + "T00:00:00");
@@ -19,6 +21,17 @@ function fechaFormateada (inputDate) {
     return day + "/" + month + "/" + year;
 };
 
+function reinstatementDate (inputDate) {
+
+        inputDate = (new Date(inputDate))
+        year = inputDate.getFullYear();
+        month = inputDate.getMonth();
+        day = inputDate.getDate();
+    
+        let reinstatement = (new Date(parseInt(year), parseInt(month), parseInt(day+2))).toISOString().slice(0, 10);
+        return reinstatement;
+    };
+
 function validarFormulario(e) {
     e.preventDefault();
     
@@ -27,9 +40,6 @@ function validarFormulario(e) {
 
     let dateBeginInserted = (formularioFecha.children[1].value);
     let dateEndInserted = (formularioFecha.children[3].value);
-
-    // let yearBeginValidated = null;
-    // let yearEndValidated = null;
 
     if (isNaN(yearBegin) || String(yearBegin).length > 4) {
         alert("La fecha ingresada en el campo de INICIO no es válida");
@@ -41,21 +51,27 @@ function validarFormulario(e) {
     } else {
         yearBeginValidated = true;
         yearEndValidated = true;
-    };
-
-    // Calcular la fecha de reintegro y cargarla en el input REINTEGRO:
-    // year = (new Date(formularioFecha.children[3].value)).getFullYear();
-    // month =  (new Date(formularioFecha.children[3].value)).getMonth();
-    // day =  (new Date(formularioFecha.children[3].value)).getDate();
-
-    // let fechaInputReintegro = (new Date(parseInt(year), parseInt(month), parseInt(day+2))).toISOString().slice(0, 10);
-
-    // formularioFecha.children[5].value = fechaInputReintegro;   
+    };   
+    if (yearBeginValidated === true && yearEndValidated === true) {
+        let reinstatement = reinstatementDate(formularioFecha.children[3].value);
+        formularioFecha.children[5].value = reinstatement;
+    
+        let dateBegin = new Date(formularioFecha.children[1].value + "T00:00:00");
+        let dateEnd = new Date(formularioFecha.children[3].value + "T00:00:00");
+        let dateReinstatament = new Date (formularioFecha.children[5].value + "T00:00:00");
+    
+        localStorage.setItem('fecha_inicio', dateBegin.toString());
+        localStorage.setItem('fecha_fin', dateEnd.toString());
+        localStorage.setItem('fecha_reintegro', dateReinstatament.toString());
+    };  
 };
 
-// localStorage.setItem('fecha_inicio', formularioFecha.children[1].value);
-// localStorage.setItem('fecha_fin', formularioFecha.children[3].value);
-// localStorage.setItem('fecha_reintegro', formularioFecha.children[5].value);
+
+
+// if (yearBeginValidated === true && yearEndValidated === true) {
+
+// };
+
 
 // EJEMPLOS:
 // const div = document.createElement("div");
