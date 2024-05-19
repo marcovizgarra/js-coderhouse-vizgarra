@@ -40,3 +40,15 @@ input {
 .btn_enviar:hover {
     background-color: #a01313;
 }
+
+.fecha {
+    display: flex;
+    flex-direction: row;
+}
+
+.fecha p {
+    background-color: #7e6d4a;
+    margin: .2rem;
+    width: 30%;
+    height: auto;
+}
