@@ -1,3 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
 * {
-    background-color: black;
+    margin: 0;
+    padding: 0;
+    font-family: "Roboto", sans-serif;   
+    text-align: center;
+    align-content: center;
+    background-color: #050113;
+    color: white;    
+}
+
+.home-page-container {
+    margin-top: 1rem;
+}
+
+form {
+    background-color: #6a6767;
+    border-radius: .5rem;
+    margin: 1rem;
+}
+
+label {
+    height: 2rem;
+    background: none;
+}
+
+input {
+    height: 2rem;
+    margin: 1rem;
+    background-color: #030f25;
+}
+
+.btn_enviar {
+    width: 5rem;
+
+    background-color: green;
+}
+
+.btn_enviar:hover {
+    background-color: #a01313;
 }

@@ -1,90 +1,100 @@
-alert("Bienvenido a el juego del número secreto!\n\nPara jugar, ingresá el rango entre el que queres que se encuentre el número \n\nTenés 10 intentos para advinar el número\n\nSi estas listo presioná aceptar para ingresar el rango en el que estará el número secreto");
+let formularioFecha = document.getElementById("form_fechas");
+formularioFecha.onsubmit = validarFormulario;
 
-let min = 0;
-let max = 0;
-let tryX = null;
-let win = false;
-let tryCount = 0;
 
-//Función para crear un número aleatorio
-function createRandomNum(minValue, maxValue) {
-    let randomNumber = Math.random();
-    let randomNumberRange = Math.floor(randomNumber * (maxValue - minValue +1)) +minValue;
+function fechaFormateada (inputDate) {
+    let newDate = new Date(inputDate + "T00:00:00");
+    let day = newDate.getDate(); 
+    let month = newDate.getMonth()+1;
+    let year = newDate.getFullYear();
 
-    return randomNumberRange;
-}
-
-min = parseInt(prompt("Ingresá el mínimo del número secreto"));
-
-// Solicitar el número mínimo
-do {
-    if (min <=0) {
-        alert("El número ingresado tiene que ser mayor que 0");
-        min = parseInt(prompt("Ingresá el mínimo del número secreto"));
-    }else if (isNaN(min)) {
-        alert("Solamente se pueden ingresar numeros");
-        min = parseInt(prompt("Ingresá el mínimo del número secreto"));
+    if (day < 10) {
+        day = '0' + String(day);
     }
-}while (isNaN(min) || min <= 0);
 
-// Solicitar el número máximo
-max = parseInt(prompt("Ingresá el máximo del número secreto"));
-
-do {
-    if (max <=0) {
-        alert("El número ingresado tiene que ser mayor que 0 (cero)")
-        max = parseInt(prompt("Ingresá el máximo del número secreto"))
-    }else if (max <= min) {
-        alert("El número ingresado no puede ser el menor, o el mismo que el mínimo");
-        max = parseInt(prompt("Ingresá el máximo del número secreto"));
-    }else if (isNaN(max)) {
-        alert("Solamente se pueden ingresar números");
-        max = parseInt(prompt("Ingresá el máximo del número secreto"));
+    if (month < 10) {
+        month = '0' + String(month);
     }
-}while (isNaN(max) || max <=0 || max <= min);
 
-if (min != 0 & max != 0) {
-    //Creación del número secreto
-    let secretNumber = createRandomNum(min, max);
+    return day + "/" + month + "/" + year;
+};
 
-    alert("Todo listo para jugar, suerte!!");
+function validarFormulario(e) {
+    e.preventDefault();
+    
+    let yearBegin = (new Date(formularioFecha.children[1].value + "T00:00:00")).getFullYear();
+    let yearEnd = (new Date(formularioFecha.children[3].value + "T00:00:00")).getFullYear();
 
-const intentosRealizados = []
+    let dateBeginInserted = (formularioFecha.children[1].value);
+    let dateEndInserted = (formularioFecha.children[3].value);
 
-    do {
-        tryX = parseInt(prompt("Ingresá el número secreto"));
+    // let yearBeginValidated = null;
+    // let yearEndValidated = null;
 
-        if (tryX <min) {
-            alert("No podes ingresar números menores al minimo establecido, que es: " + min);
-        }else if (tryX > max) {
-            alert("No podes ingresar números mayores que el máximo establecido, que es: " + max);
-        }else if (isNaN(tryX)) {
-            alert("Solamente se pueden ingresar números");
-        }else if (tryCount == 9) {
-            intentosRealizados.push(tryX);
-            alert("Agotaste todos tus intentos, recarga la página para volver a intentarlo, que tengas suerte");
-            win = true;
-            let mostrarIntentos = "Los intentos realizados fueron: \n· " + intentosRealizados.join('\n· ') + "\n\n Y el número secreto era: " + secretNumber;
-            alert(mostrarIntentos);
-        }else if (tryX != secretNumber) {
-            alert("No adivinaste, intentá de nuevo\n\nTe quedan " + (9 - tryCount) + " intentos");
-            tryCount++;
-            intentosRealizados.push(tryX);
-        }else if (tryX == secretNumber) {
-            
-            // Ciclo FOR que muestra los intentos realizados tras ganar el juego
-            let intentosAlGanar = "";
-            for (let i=0; i < tryCount; i++) {
-                intentosAlGanar += "· " + " " + intentosRealizados[i] + "\n";
-            };
-            
-            alert("Felicidades!!, adivinaste el número secreto\n\n" + "Te llevó " + tryCount + " intentos hacerlo.\n\n"  + "Tus intentos realizados antes de adivinarlo fueron: \n" + intentosAlGanar);
-            win = true;
-            let message = "Hace clic en aceptar para celebrar";
-            message;
-            if (confirm(message)) {
-                window.location.href = "https://www.youtube.com/watch?v=skVg5FlVKS0";
-            }
-        }
-    }while (win == false & tryCount <10);
-}
+    if (isNaN(yearBegin) || String(yearBegin).length > 4) {
+        alert("La fecha ingresada en el campo de INICIO no es válida");
+    } else if (isNaN(yearEnd) || String(yearEnd).length > 4) {
+        alert("La fecha ingresada en el campo de FIN no es válida");
+    } else if (dateBeginInserted > dateEndInserted) {
+        alert("El campo FIN no puede ser una fecha anterior a la de INICIO.");
+        formularioFecha.children[3].value = null; 
+    } else {
+        yearBeginValidated = true;
+        yearEndValidated = true;
+    };
+
+    // Calcular la fecha de reintegro y cargarla en el input REINTEGRO:
+    // year = (new Date(formularioFecha.children[3].value)).getFullYear();
+    // month =  (new Date(formularioFecha.children[3].value)).getMonth();
+    // day =  (new Date(formularioFecha.children[3].value)).getDate();
+
+    // let fechaInputReintegro = (new Date(parseInt(year), parseInt(month), parseInt(day+2))).toISOString().slice(0, 10);
+
+    // formularioFecha.children[5].value = fechaInputReintegro;   
+};
+
+// localStorage.setItem('fecha_inicio', formularioFecha.children[1].value);
+// localStorage.setItem('fecha_fin', formularioFecha.children[3].value);
+// localStorage.setItem('fecha_reintegro', formularioFecha.children[5].value);
+
+// EJEMPLOS:
+// const div = document.createElement("div");
+// const p = document.createElement("p")
+
+// let videoJuegos = [
+//     {
+//         id: 1,
+//         nombre: "Assassin's Creed",
+//         plataforma: "PS3",
+//         publicacion: 2007,
+//         genero: "Aventura", 
+//     },
+//     {
+//         id: 2,
+//         nombre: "Assassin's Creed II",
+//         pataforma: [
+//             "PS3", "PS4"
+//         ],
+//         publicacion: 2009,
+//         genero: "Aventura",
+//     }
+// ];
+
+// for (const juego of videoJuegos) {
+//     let contenedor = document.createElement("div");
+//     contenedor.innerHTML = `<h3> ID: ${juego.nombre}</h3>`
+
+//     document.body.appendChild(contenedor);
+// }
+
+
+
+
+// MODIFICAR LAS CLASES DE ELEMENTOS EN JS
+    // const divPrueba = document.getElementById("div-prueba-15-05");
+    // divPrueba.className += "formato-prueba";
+    // alert(divPrueba.className);
+
+// GET ELEMENT BY ID - INNER TEXT
+    // const titulo  = document.getElementById("titulo");
+    // titulo.innerText = "Licencias Anuales";

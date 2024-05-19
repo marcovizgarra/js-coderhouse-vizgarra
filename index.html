@@ -1,13 +1,40 @@
 <!DOCTYPE html>
-<html lang="spanish">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/main.css">
-    <title>Entregable 1 - Vizgarra</title>
+    <link rel="shortcut icon" href="./assets/img/javascript-logo.png">
+    <title>PROYECTO JS</title>
 </head>
 <body>
-    
+    <section class="home-page-container">
+        <h1 id="titulo">PROYECTO JS</h1>
+
+        <!-- <form id="formulario">
+            <input type="text">
+            <input type="number">
+            <input type="submit" value="Enviar">
+        </form> -->
+
+        <form id="form_fechas">
+            <label for="inicio">INICIO</label>
+                <input id="inicio" class="fecha_inicio" type="date">
+
+            <label for="fin">FIN (inclusive)</label>
+                <input id="fin" class="fecha_fin" type="date">
+
+            <label for="reintegro">REINTEGRO</label>
+                <input id="reintegro" name="fecha_reintegro" type="date">
+            
+                <input id="btn_enviar_1" class="btn_enviar" type="submit" value="Enviar">
+        </form>
+    </section>
+
+    <div id="prueba">
+        
+    </div>
+
     <script src="./js/main.js"></script>
 </body>
 </html>
