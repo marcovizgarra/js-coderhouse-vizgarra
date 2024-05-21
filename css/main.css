@@ -12,11 +12,16 @@
 
 .home-page-container {
     margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 form {
     background-color: #6a6767;
     border-radius: .5rem;
+    padding-left: 1.1rem;
     margin: 1rem;
 }
 
@@ -41,14 +46,28 @@ input {
     background-color: #a01313;
 }
 
-.fecha {
+.home-page-container .fecha {
     display: flex;
-    flex-direction: row;
+    width: 70%;
+    flex-direction: column;
+    background-color: #3d3d3d;
+    justify-content: center;
+    border-radius: .5rem;
+    margin: 1rem;
 }
 
-.fecha p {
-    background-color: #7e6d4a;
-    margin: .2rem;
-    width: 30%;
+.home-page-container .fecha .contenedor_objeto {
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    background-color: #888888;
+    justify-content: center;
+    border-radius: .2rem;
+}
+
+.home-page-container .fecha .contenedor_objeto .item_object {
+    background-color: #0e003f;
+    border: 1px solid grey;
+    width: 25%;
     height: auto;
 }
