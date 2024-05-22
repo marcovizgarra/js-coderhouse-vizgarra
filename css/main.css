@@ -46,6 +46,22 @@ input {
     background-color: #a01313;
 }
 
+.home-page-container .fecha .encabezado {
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    background-color: #888888;
+    justify-content: center;
+    border-radius: .2rem;
+}
+
+.home-page-container .fecha .encabezado .header_object {
+    background-color: #0e003f;
+    border: 1px solid grey;
+    width: 25%;
+    height: auto;
+}
+
 .home-page-container .fecha {
     display: flex;
     width: 70%;
@@ -66,7 +82,7 @@ input {
 }
 
 .home-page-container .fecha .contenedor_objeto .item_object {
-    background-color: #0e003f;
+    background-color: #544880;
     border: 1px solid grey;
     width: 25%;
     height: auto;

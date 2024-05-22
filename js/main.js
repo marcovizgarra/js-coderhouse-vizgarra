@@ -5,10 +5,35 @@ let yearBeginValidated = null;
 let yearEndValidated = null;
 
 const dates = [];
+const header = [
+    {
+        "ord": "ORD",
+        "begin": "INICIO",
+        "end": "FIN",
+        "reinstatement": "REINTEGRO",
+    }
+]
 
-function arrayDOM(array) {
+function arrayDOM(array, headerArray) {
     const div_fecha = document.getElementById("fecha");
     div_fecha.innerHTML="";
+
+    const header_div = document.createElement("div");
+    header_div.classList.add("encabezado");
+
+    // Encabezado
+    headerArray.forEach(object => {
+        for (const key in object) {
+            const p_header = document.createElement("p");
+            p_header.classList.add("header_object");
+            p_header.textContent = `${object[key]}`
+
+            header_div.appendChild(p_header);
+        }
+    });
+
+    //Contendio del objeto con fechas ingresadas
+    div_fecha.appendChild(header_div);
 
     array.forEach(object => {
         const div_contenedor = document.createElement("div");
@@ -17,7 +42,7 @@ function arrayDOM(array) {
         for (const key in object) {
             const p = document.createElement("p");
             p.classList.add("item_object")
-            p.textContent = `${key.toUpperCase()}: ${object[key]}`;
+            p.textContent = `${object[key]}`;
         
             div_contenedor.appendChild(p);
         }
@@ -93,6 +118,6 @@ function validarFormulario(e) {
             "reintegro": dateReinstatament,
         });
 
-        arrayDOM(dates);
+        arrayDOM(dates, header);
     };  
 };
