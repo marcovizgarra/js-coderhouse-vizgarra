@@ -106,11 +106,14 @@ function validarFormulario(e) {
 
     if (isNaN(yearBegin) || String(yearBegin).length > 4) {
         alert("La fecha ingresada en el campo de INICIO no es válida");
+        yearBeginValidated = false;
     } else if (isNaN(yearEnd) || String(yearEnd).length > 4) {
         alert("La fecha ingresada en el campo de FIN no es válida");
+        yearEndValidated = false;
     } else if (dateBeginInserted > dateEndInserted) {
         alert("El campo FIN no puede ser una fecha anterior a la de INICIO.");
-        formularioFecha.children[3].value = null; 
+        formularioFecha.children[3].value = null;
+        yearBeginValidated = false; 
     } else {
         yearBeginValidated = true;
         yearEndValidated = true;
