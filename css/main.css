@@ -57,6 +57,7 @@ input {
 
 .home-page-container .fecha .encabezado .header_object {
     background-color: #0e003f;
+    padding: .3rem;
     border: 1px solid grey;
     width: 25%;
     height: auto;
@@ -82,7 +83,8 @@ input {
 }
 
 .home-page-container .fecha .contenedor_objeto .item_object {
-    background-color: #544880;
+    background-color: #434879;
+    padding: .5rem;
     border: 1px solid grey;
     width: 25%;
     height: auto;

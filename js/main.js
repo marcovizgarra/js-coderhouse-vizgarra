@@ -79,6 +79,22 @@ function reinstatementDate (inputDate) {
         return reinstatement;
 };
 
+function objectDuplicated(array) {
+
+    let dateBegin = fechaFormateada(formularioFecha.children[1].value);
+    let dateEnd = fechaFormateada(formularioFecha.children[3].value);
+    let dateReinstatament = fechaFormateada(formularioFecha.children[5].value);
+    let validatedObject = true;
+
+    for (let i = 0; i < array.length; i ++) {
+        if (array[i].inicio === dateBegin   &&   array[i].fin === dateEnd   &&  array[i].reintegro === dateReinstatament) {
+            validatedObject = false;
+            break;
+        };
+    };
+    return validatedObject;
+};
+
 function validarFormulario(e) {
     e.preventDefault();
     
@@ -95,29 +111,40 @@ function validarFormulario(e) {
     } else if (dateBeginInserted > dateEndInserted) {
         alert("El campo FIN no puede ser una fecha anterior a la de INICIO.");
         formularioFecha.children[3].value = null; 
-    } 
-    else {
+    } else {
         yearBeginValidated = true;
         yearEndValidated = true;
     };   
 
-    if (yearBeginValidated === true && yearEndValidated === true) {
-        let reinstatement = reinstatementDate(formularioFecha.children[3].value);
-        formularioFecha.children[5].value = reinstatement;
-    
-        let dateBegin = fechaFormateada(formularioFecha.children[1].value);
-        let dateEnd = fechaFormateada(formularioFecha.children[3].value);
-        let dateReinstatament = fechaFormateada(formularioFecha.children[5].value);
-    
-        let idFila = dates.length + 1;
-       
-        dates.push({
-            "fila": idFila,
-            "inicio": dateBegin,
-            "fin": dateEnd,
-            "reintegro": dateReinstatament,
-        });
+    let reinstatement = reinstatementDate(formularioFecha.children[3].value);
+    formularioFecha.children[5].value = reinstatement;
 
+    let dateBegin = fechaFormateada(formularioFecha.children[1].value);
+    let dateEnd = fechaFormateada(formularioFecha.children[3].value);
+    let dateReinstatament = fechaFormateada(formularioFecha.children[5].value);
+    let idFile = dates.length + 1;
+
+    if (yearBeginValidated === true && yearEndValidated === true && dates.length === 0) { 
+        dates.push(
+            {
+                "fila": idFile,
+                "inicio": dateBegin,
+                "fin": dateEnd,
+                "reintegro": dateReinstatament,
+            }
+        );
         arrayDOM(dates, header);
+    } else if (yearBeginValidated === true && yearEndValidated === true && dates.length > 0 && objectDuplicated(dates) === true) {
+        dates.push(
+            {
+                "fila": idFile,
+                "inicio": dateBegin,
+                "fin": dateEnd,
+                "reintegro": dateReinstatament,
+            }
+        );
+        arrayDOM(dates, header);
+    } else {
+        alert("NO --2");
     };  
 };
