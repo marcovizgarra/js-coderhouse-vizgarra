@@ -145,6 +145,6 @@ function validarFormulario(e) {
         );
         arrayDOM(dates, header);
     } else {
-        alert("NO --2");
+        alert("No se pueden ingresar filas exactamente iguales");
     };  
 };
