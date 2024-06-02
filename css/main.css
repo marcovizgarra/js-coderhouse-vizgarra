@@ -82,6 +82,11 @@ input {
     border-radius: .5rem;
 }
 
+.home-page-container #form_fechas .cantidad {
+    border-radius: .5rem;
+    width: 4rem;
+}
+
 .home-page-container .fecha .contenedor_objeto {
     width: auto;
     display: flex;

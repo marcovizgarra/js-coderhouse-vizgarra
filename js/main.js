@@ -1,6 +1,7 @@
 let formularioFecha = document.getElementById("form_fechas");
 formularioFecha.onsubmit = validarFormulario;
 
+
 let yearBeginValidated = null;
 let yearEndValidated = null;
 
@@ -8,6 +9,9 @@ const dates = [];
 const header = [
     {
         "ord": "ORD",
+        "last_name": "APELLIDO",
+        "name": "NOMBRE",
+        "dni": "DNI",
         "begin": "INICIO",
         "end": "FIN",
         "reinstatement": "REINTEGRO",
@@ -68,21 +72,42 @@ function fechaFormateada (inputDate) {
     return day + "/" + month + "/" + year;
 };
 
-function reinstatementDate (inputDate) {
+function capitalizeString(string) {
+    string = string.split(" ");
 
-        inputDate = (new Date(inputDate))
-        year = inputDate.getFullYear();
-        month = inputDate.getMonth();
-        day = inputDate.getDate();
+    let stringUpperCase = string.map(element => {
+        return element.charAt(0).toUpperCase() + element.slice(1);
+    });
+
+    let newString = stringUpperCase.join(" ");
+    return newString
+};
+
+function addDays (date, add) {
+    let newDate = new Date(date + "T00:00:00");
+    newDate.setDate(newDate.getDate() + add);
     
-        let reinstatement = new Date(year, month, day + 2).toISOString().slice(0, 10);
-        return reinstatement;
+    let formattedDate = "";
+    let day = newDate.getDate(); 
+    let month = newDate.getMonth() + 1;
+    let year = newDate.getFullYear();
+
+    if (day < 10) {
+        day = '0' + String(day);
+    }
+
+    if (month < 10) {
+        month = '0' + String(month);
+    }
+
+    formattedDate = year + "-" + month + "-" + day
+    return formattedDate;
 };
 
 function objectDuplicated(array) {
 
     let dateBegin = fechaFormateada(formularioFecha.children[7].value);
-    let dateEnd = fechaFormateada(formularioFecha.children[9].value);
+    let dateEnd = fechaFormateada(formularioFecha.children[7].value+quantity);
     let dateReinstatament = fechaFormateada(formularioFecha.children[5].value);
     let validatedObject = true;
 
@@ -97,47 +122,49 @@ function objectDuplicated(array) {
 
 function validarFormulario(e) {
     e.preventDefault();
-    
-    let yearBegin = (new Date(formularioFecha.children[7].value + "T00:00:00")).getFullYear();
-    let yearEnd = (new Date(formularioFecha.children[9].value + "T00:00:00")).getFullYear();
 
-    let dateBeginInserted = (formularioFecha.children[7].value);
-    let dateEndInserted = (formularioFecha.children[9].value);
+    //Variables - datos personales
+    let last_name = (formularioFecha.children[1].value).toUpperCase();
+    let name = capitalizeString(formularioFecha.children[3].value);
+    let dni = (parseInt(formularioFecha.children[5].value)).toLocaleString('es-ES');
+
+    //Variables - fechas
+    let inputBegin = formularioFecha.children[7].value;
+    let quantity = parseInt(formularioFecha.children[9].value);
+    let yearBegin = (new Date(inputBegin + "T00:00:00")).getFullYear();
+    let dateBegin = fechaFormateada(inputBegin);
+    let dateEnd = addDays(inputBegin, quantity - 1);
+    let dateReinstatament = fechaFormateada(addDays(dateEnd, 1));
+    let idFile = dates.length + 1;
+    dateEnd = fechaFormateada(dateEnd);
 
     if (isNaN(yearBegin) || String(yearBegin).length > 4) {
         alert("La fecha ingresada en el campo de INICIO no es válida");
         yearBeginValidated = false;
-    } else if (isNaN(yearEnd) || String(yearEnd).length > 4) {
-        alert("La fecha ingresada en el campo de FIN no es válida");
-        yearEndValidated = false;
-    } else if (dateBeginInserted > dateEndInserted) {
-        alert("El campo FIN no puede ser una fecha anterior a la de INICIO.");
-        formularioFecha.children[9].value = null;
-        yearBeginValidated = false; 
     } else {
         yearBeginValidated = true;
-        yearEndValidated = true;
     };   
 
-    let dateBegin = fechaFormateada(formularioFecha.children[7].value);
-    let dateEnd = fechaFormateada(formularioFecha.children[9].value);
-    let dateReinstatament = fechaFormateada(reinstatementDate(formularioFecha.children[9].value));
-    let idFile = dates.length + 1;
-
-    if (yearBeginValidated === true && yearEndValidated === true && dates.length === 0) { 
+    if (yearBeginValidated === true && dates.length === 0) { 
         dates.push(
             {
                 "fila": idFile,
+                "apellido": last_name,
+                "nombre": name,
+                "dni": dni,
                 "inicio": dateBegin,
                 "fin": dateEnd,
                 "reintegro": dateReinstatament,
             }
         );
         arrayDOM(dates, header);
-    } else if (yearBeginValidated === true && yearEndValidated === true && dates.length > 0 && objectDuplicated(dates) === true) {
+    } else if (yearBeginValidated === true && dates.length > 0) { // && objectDuplicated(dates) === true
         dates.push(
             {
                 "fila": idFile,
+                "apellido": last_name,
+                "nombre": name,
+                "dni": dni,
                 "inicio": dateBegin,
                 "fin": dateEnd,
                 "reintegro": dateReinstatament,
