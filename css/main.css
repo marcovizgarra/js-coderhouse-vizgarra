@@ -37,8 +37,9 @@ input {
 }
 
 .btn_enviar {
-    width: 5rem;
-
+    width: 7rem;
+    height: 2.1rem;
+    border-radius: .5rem;
     background-color: green;
 }
 
@@ -71,6 +72,14 @@ input {
     justify-content: center;
     border-radius: .5rem;
     margin: 1rem;
+}
+
+.home-page-container #form_fechas .dato_personal {
+    border-radius: .5rem;
+}
+
+.home-page-container #form_fechas .input_fecha {
+    border-radius: .5rem;
 }
 
 .home-page-container .fecha .contenedor_objeto {

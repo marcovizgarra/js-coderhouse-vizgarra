@@ -81,8 +81,8 @@ function reinstatementDate (inputDate) {
 
 function objectDuplicated(array) {
 
-    let dateBegin = fechaFormateada(formularioFecha.children[1].value);
-    let dateEnd = fechaFormateada(formularioFecha.children[3].value);
+    let dateBegin = fechaFormateada(formularioFecha.children[7].value);
+    let dateEnd = fechaFormateada(formularioFecha.children[9].value);
     let dateReinstatament = fechaFormateada(formularioFecha.children[5].value);
     let validatedObject = true;
 
@@ -98,11 +98,11 @@ function objectDuplicated(array) {
 function validarFormulario(e) {
     e.preventDefault();
     
-    let yearBegin = (new Date(formularioFecha.children[1].value + "T00:00:00")).getFullYear();
-    let yearEnd = (new Date(formularioFecha.children[3].value + "T00:00:00")).getFullYear();
+    let yearBegin = (new Date(formularioFecha.children[7].value + "T00:00:00")).getFullYear();
+    let yearEnd = (new Date(formularioFecha.children[9].value + "T00:00:00")).getFullYear();
 
-    let dateBeginInserted = (formularioFecha.children[1].value);
-    let dateEndInserted = (formularioFecha.children[3].value);
+    let dateBeginInserted = (formularioFecha.children[7].value);
+    let dateEndInserted = (formularioFecha.children[9].value);
 
     if (isNaN(yearBegin) || String(yearBegin).length > 4) {
         alert("La fecha ingresada en el campo de INICIO no es válida");
@@ -112,19 +112,16 @@ function validarFormulario(e) {
         yearEndValidated = false;
     } else if (dateBeginInserted > dateEndInserted) {
         alert("El campo FIN no puede ser una fecha anterior a la de INICIO.");
-        formularioFecha.children[3].value = null;
+        formularioFecha.children[9].value = null;
         yearBeginValidated = false; 
     } else {
         yearBeginValidated = true;
         yearEndValidated = true;
     };   
 
-    let reinstatement = reinstatementDate(formularioFecha.children[3].value);
-    formularioFecha.children[5].value = reinstatement;
-
-    let dateBegin = fechaFormateada(formularioFecha.children[1].value);
-    let dateEnd = fechaFormateada(formularioFecha.children[3].value);
-    let dateReinstatament = fechaFormateada(formularioFecha.children[5].value);
+    let dateBegin = fechaFormateada(formularioFecha.children[7].value);
+    let dateEnd = fechaFormateada(formularioFecha.children[9].value);
+    let dateReinstatament = fechaFormateada(reinstatementDate(formularioFecha.children[9].value));
     let idFile = dates.length + 1;
 
     if (yearBeginValidated === true && yearEndValidated === true && dates.length === 0) { 
