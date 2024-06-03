@@ -9,6 +9,12 @@
     color: white;    
 }
 
+.alert_span {
+    text-transform: uppercase;
+    font-weight: bold;
+    color: rgb(255, 0, 34);
+}
+
 .home-page-container {
     background-color: #050113;
     height: 100vh;

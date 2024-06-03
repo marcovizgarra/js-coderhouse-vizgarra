@@ -140,20 +140,44 @@ function validarFormulario(e) {
 
     if (isNaN(yearBegin) || String(yearBegin).length > 4) {
         Swal.fire({
-            title: "Ha ingresado datos invalidos",
-            text: "La fecha ingresada en el campo de INICIO no es válida\nRevise el año de la fecha.",
+            title: "ERROR en la carga de datos",
+            html: "<span class=\"alert_span\">Revise el año de la fecha de inicio</span><br><br>Ha ingresado datos inválidos en el campo INICIO",
             icon: "error",
             color: "white",
             background: "#282C34",
             confirmButtonText: "Aceptar",
         })
-        // alert("La fecha ingresada en el campo de INICIO no es válida");
         inputValidated = false;
     } else if ((inputDni.toString()).length > 8) {
-        alert("El DNI ingresado no puede exceder los 8 caracteres")
+        Swal.fire({
+            title: "ERROR en la carga de datos",
+            text: "El DNI ingresado no puede exceder los 8 caracteres",
+            icon: "error",
+            color: "white",
+            background: "#282C34",
+            confirmButtonText: "Aceptar",
+        });
+               
         inputValidated = false;
     } else if (quantity > 30) {
-        alert("No se pueden cargar más días que 30")
+        Swal.fire({
+            title: "ERROR en la carga de datos",
+            html: "<span class=\"alert_span\">Revise el campo cantidad</span><br><br>El dato ingresado supera el máximo permitido",
+            icon: "error",
+            color: "white",
+            background: "#282C34",
+            confirmButtonText: "Aceptar",
+        });
+        inputValidated = false;
+    } else if (quantity <= 0 ) {
+        Swal.fire({
+            title: "ERROR en la carga de datos",
+            html: "<span class=\"alert_span\">Revise el campo cantidad</span><br><br>La cantidad ingresada debe ser de al menos un (1) día",
+            icon: "error",
+            color: "white",
+            background: "#282C34",
+            confirmButtonText: "Aceptar",
+        });
         inputValidated = false;
     } else {
         inputValidated = true;
@@ -174,7 +198,14 @@ function validarFormulario(e) {
         );
         arrayDOM(dates, header);
     } else if (objectDuplicated(dates) === false) {
-        alert("No se pueden ingresar filas exactamente iguales");
+        Swal.fire({
+            title: "ERROR en la carga de datos",
+            html: "<span class=\"alert_span\">No es posible insertar filas duplicadas</span><br><br>Los datos ingresados ya se encuentran cargados en la base de datos",
+            icon: "error",
+            color: "white",
+            background: "#282C34",
+            confirmButtonText: "Aceptar",
+        });
     } else if (inputValidated === true && dates.length > 0 && objectDuplicated(dates) === true) {
         dates.push(
             {
