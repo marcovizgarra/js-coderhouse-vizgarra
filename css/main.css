@@ -6,15 +6,16 @@
     font-family: "Roboto", sans-serif;   
     text-align: center;
     align-content: center;
-    background-color: #050113;
     color: white;    
 }
 
 .home-page-container {
-    margin-top: 1rem;
+    background-color: #050113;
+    height: 100vh;
+    padding: 1rem;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: top;
     align-items: center;
 }
 
@@ -97,9 +98,16 @@ input {
 }
 
 .home-page-container .fecha .contenedor_objeto .item_object {
-    background-color: #434879;
     padding: .5rem;
     border: 1px solid grey;
     width: 25%;
     height: auto;
+}
+
+.home-page-container .fecha .contenedor_objeto .pair {
+    background-color: #3b3f68;
+}
+
+.home-page-container .fecha .contenedor_objeto .odds {
+    background-color: #24284e;
 }
