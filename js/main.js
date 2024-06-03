@@ -12,6 +12,7 @@ const header = [
         "last_name": "APELLIDO",
         "name": "NOMBRE",
         "dni": "DNI",
+        "quantity": "CANTIDAD",
         "begin": "INICIO",
         "end": "FIN",
         "reinstatement": "REINTEGRO",
@@ -105,14 +106,25 @@ function addDays (date, add) {
 };
 
 function objectDuplicated(array) {
-
-    let dateBegin = fechaFormateada(formularioFecha.children[7].value);
-    let dateEnd = fechaFormateada(formularioFecha.children[7].value+quantity);
-    let dateReinstatament = fechaFormateada(formularioFecha.children[5].value);
     let validatedObject = true;
 
+    //Variables - datos personales
+    let l_name = (formularioFecha.children[1].value).toUpperCase();
+    let v_name = capitalizeString(formularioFecha.children[3].value);
+    let dni = (parseInt(formularioFecha.children[5].value)).toLocaleString('es-ES');
+
+    //Variables - fechas
+    let inputBegin = formularioFecha.children[7].value;
+    let quantity = parseInt(formularioFecha.children[9].value);
+    
+    let dateBegin = fechaFormateada(inputBegin);
+    let dateEnd = addDays(inputBegin, quantity - 1);
+    let dateReinstatament = fechaFormateada(addDays(dateEnd, 1));
+    dateEnd = fechaFormateada(dateEnd);
+    
+
     for (let i = 0; i < array.length; i ++) {
-        if (array[i].inicio === dateBegin   &&   array[i].fin === dateEnd   &&  array[i].reintegro === dateReinstatament) {
+        if (array[i].apellido === l_name && array[i].nombre === v_name && array[i].dni === dni && array[i].inicio === dateBegin && array[i].fin === dateEnd && array[i].reintegro  === dateReinstatament) {
             validatedObject = false;
             break;
         };
@@ -124,9 +136,10 @@ function validarFormulario(e) {
     e.preventDefault();
 
     //Variables - datos personales
+    let inputDni = formularioFecha.children[5].value;
     let last_name = (formularioFecha.children[1].value).toUpperCase();
     let name = capitalizeString(formularioFecha.children[3].value);
-    let dni = (parseInt(formularioFecha.children[5].value)).toLocaleString('es-ES');
+    let dni = (parseInt(inputDni)).toLocaleString('es-ES');
 
     //Variables - fechas
     let inputBegin = formularioFecha.children[7].value;
@@ -140,38 +153,46 @@ function validarFormulario(e) {
 
     if (isNaN(yearBegin) || String(yearBegin).length > 4) {
         alert("La fecha ingresada en el campo de INICIO no es válida");
-        yearBeginValidated = false;
+        inputValidated = false;
+    } else if ((inputDni.toString()).length > 8) {
+        alert("El DNI ingresado no puede exceder los 8 caracteres")
+        inputValidated = false;
+    } else if (quantity > 30) {
+        alert("No se pueden cargar más días que 30")
+        inputValidated = false;
     } else {
-        yearBeginValidated = true;
+        inputValidated = true;
     };   
 
-    if (yearBeginValidated === true && dates.length === 0) { 
+    if (inputValidated === true && dates.length === 0) { 
         dates.push(
             {
                 "fila": idFile,
                 "apellido": last_name,
                 "nombre": name,
                 "dni": dni,
+                "cantidad": quantity,
                 "inicio": dateBegin,
                 "fin": dateEnd,
                 "reintegro": dateReinstatament,
             }
         );
         arrayDOM(dates, header);
-    } else if (yearBeginValidated === true && dates.length > 0) { // && objectDuplicated(dates) === true
-        dates.push(
-            {
-                "fila": idFile,
-                "apellido": last_name,
-                "nombre": name,
-                "dni": dni,
-                "inicio": dateBegin,
-                "fin": dateEnd,
-                "reintegro": dateReinstatament,
-            }
-        );
-        arrayDOM(dates, header);
-    } else {
+    } else if (objectDuplicated(dates) === false) {
         alert("No se pueden ingresar filas exactamente iguales");
+    } else if (inputValidated === true && dates.length > 0 && objectDuplicated(dates) === true) {
+        dates.push(
+            {
+                "fila": idFile,
+                "apellido": last_name,
+                "nombre": name,
+                "dni": dni,
+                "cantidad": quantity,
+                "inicio": dateBegin,
+                "fin": dateEnd,
+                "reintegro": dateReinstatament,
+            }
+        );
+        arrayDOM(dates, header);
     };  
 };
