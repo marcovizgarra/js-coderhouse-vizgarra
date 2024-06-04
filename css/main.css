@@ -75,7 +75,7 @@
 }
 
 .home-page-container {
-    background: linear-gradient(to top, #00000081, #00000094), url(/assets/img/background.jpg);
+    background: linear-gradient(to top, #00000081, #00000094), url(../assets/img/background.jpg);
     background-size:cover ;
     background-color: #050113;
     min-height: 100vh;
