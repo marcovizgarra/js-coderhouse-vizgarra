@@ -7,6 +7,8 @@ btnSave.onsubmit = save;
 let btnClear = document.getElementById("clear_local_storage");
 btnClear.onsubmit = clear;
 
+let btnSearchStorage = document.getElementById("search_storage_form");
+btnSearchStorage.onsubmit = searchStorage;
 
 const dates = [];
 const header = [

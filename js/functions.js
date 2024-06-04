@@ -254,6 +254,7 @@ function validarFormulario(e) {
     };
 };
 
+//modificar para reducir lineas de código
 function save (e) {
     e.preventDefault();
 
@@ -319,4 +320,15 @@ function clear (e) {
     fechasCargadas.innerHTML = '';
 
     return dates.length = 0;
+};
+
+function searchStorage (e) {
+    e.preventDefault();
+
+    let fechasCargadas = document.getElementById("fecha");
+    if (localStorageExists("datesObject") === true) {
+        let objectLocalStorage = JSON.parse(localStorage.getItem("datesObject"));
+        fechasCargadas.innerHTML = '';  
+        arrayDOM(objectLocalStorage, header)
+    }
 };
