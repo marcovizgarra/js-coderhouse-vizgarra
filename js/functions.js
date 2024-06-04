@@ -51,31 +51,26 @@ function addDays (date, add) {
     return formattedDate;
 };
 
-function objectDuplicated(array) {
-    let validatedObject = true;
-
-    //Variables - datos personales
-    let l_name = (formularioFecha.children[1].value).toUpperCase();
-    let v_name = capitalizeString(formularioFecha.children[3].value);
-    let dni = (parseInt(formularioFecha.children[5].value)).toLocaleString('es-ES');
-
-    //Variables - fechas
-    let inputBegin = formularioFecha.children[7].value;
-    let quantity = parseInt(formularioFecha.children[9].value);
+function localStorageExists (key) {
+    let validateFlag = null;
     
-    let dateBegin = formattedDate(inputBegin);
-    let dateEnd = addDays(inputBegin, quantity - 1);
-    let dateReinstatament = formattedDate(addDays(dateEnd, 1));
-    dateEnd = formattedDate(dateEnd);
-    
-
-    for (let i = 0; i < array.length; i ++) {
-        if (array[i].apellido === l_name && array[i].nombre === v_name && array[i].dni === dni && array[i].inicio === dateBegin && array[i].fin === dateEnd && array[i].reintegro  === dateReinstatament) {
-            validatedObject = false;
-            break;
-        };
+    if ((localStorage.getItem(key)) === null) {
+        validateFlag = false;
+    } else {
+        validateFlag = true;
     };
-    return validatedObject;
+    return validateFlag;
+};
+
+function objectDuplicated(array, obj) {
+    return array.some(item => 
+        item.apellido === obj.apellido &&
+        item.nombre === obj.nombre &&
+        item.dni === obj.dni &&
+        item.inicio === obj.inicio &&
+        item.fin === obj.fin &&
+        item.reintegro === obj.reintegro
+    );
 };
 
 function arrayDOM(array, headerArray) {
@@ -138,6 +133,22 @@ function validarFormulario(e) {
     let idFile = dates.length + 1;
     dateEnd = formattedDate(dateEnd);
 
+    //Variable - Objeto en localStorge
+    let objectLocalStorage = JSON.parse(localStorage.getItem("datesObject"));
+
+    let inputValidated = null;
+    let newEntry = {
+        "fila": idFile,
+        "apellido": last_name,
+        "nombre": name,
+        "dni": dni,
+        "cantidad": quantity,
+        "inicio": dateBegin,
+        "fin": dateEnd,
+        "reintegro": dateReinstatament,
+    };
+
+    // Validar datos ingresados
     if (isNaN(yearBegin) || String(yearBegin).length > 4) {
         Swal.fire({
             title: "ERROR en la carga de datos",
@@ -156,8 +167,17 @@ function validarFormulario(e) {
             color: "white",
             background: "#282C34",
             confirmButtonText: "Aceptar",
-        });
-               
+        });   
+        inputValidated = false;
+    } else if (inputDni <= 0) {
+        Swal.fire({
+            title: "ERROR en la carga de datos",
+            text: "El DNI ingresado no puede ser menor o igual que cero",
+            icon: "error",
+            color: "white",
+            background: "#282C34",
+            confirmButtonText: "Aceptar",
+        });  
         inputValidated = false;
     } else if (quantity > 30) {
         Swal.fire({
@@ -183,21 +203,40 @@ function validarFormulario(e) {
         inputValidated = true;
     };   
 
-    if (inputValidated === true && dates.length === 0) { 
-        dates.push(
-            {
-                "fila": idFile,
-                "apellido": last_name,
-                "nombre": name,
-                "dni": dni,
-                "cantidad": quantity,
-                "inicio": dateBegin,
-                "fin": dateEnd,
-                "reintegro": dateReinstatament,
-            }
-        );
-        arrayDOM(dates, header);
-    } else if (objectDuplicated(dates) === false) {
+    //Validar que los datos ingresados no estén repetidos
+    let flagDatesArray = null;
+    let flagLocalStorage = null;
+    
+    if (inputValidated === true) {
+
+        if (localStorageExists("datesObject") === false && dates.length === 0) {
+            dates.push(newEntry);
+            arrayDOM(dates, header)
+        } else {
+            if (dates.length >= 0) {
+                flagDatesArray = objectDuplicated(dates, newEntry);
+            } 
+            
+            if (localStorageExists("datesObject") === true) {
+                flagLocalStorage = objectDuplicated(objectLocalStorage, newEntry);
+            } else {
+                flagLocalStorage = false;
+            };
+        };
+    }
+
+    if (flagDatesArray === true) {
+        Swal.fire({
+            title: "ERROR en la carga de datos",
+            html: "<span class=\"alert_span\">No es posible insertar filas duplicadas</span>",
+            icon: "error",
+            color: "white",
+            background: "#282C34",
+            confirmButtonText: "Aceptar",
+        });
+    };
+
+    if (flagLocalStorage === true) {
         Swal.fire({
             title: "ERROR en la carga de datos",
             html: "<span class=\"alert_span\">No es posible insertar filas duplicadas</span><br><br>Los datos ingresados ya se encuentran cargados en la base de datos",
@@ -206,19 +245,78 @@ function validarFormulario(e) {
             background: "#282C34",
             confirmButtonText: "Aceptar",
         });
-    } else if (inputValidated === true && dates.length > 0 && objectDuplicated(dates) === true) {
-        dates.push(
-            {
-                "fila": idFile,
-                "apellido": last_name,
-                "nombre": name,
-                "dni": dni,
-                "cantidad": quantity,
-                "inicio": dateBegin,
-                "fin": dateEnd,
-                "reintegro": dateReinstatament,
-            }
-        );
-        arrayDOM(dates, header);
-    };  
+    };
+
+    //Insertar filas nuevas si no hay datos repetidos
+    if (flagDatesArray === false && flagLocalStorage === false) {
+        dates.push(newEntry);
+        arrayDOM(dates, header)
+    };
+};
+
+function save (e) {
+    e.preventDefault();
+
+    let validateFlag = true;
+    let fechasCargadas = document.getElementById("fecha");
+    let localStorageString = localStorage.getItem("datesObject");
+    let newObject = JSON.parse(localStorageString);
+    let newString = "";
+
+    if (dates.length === 0) {
+        Swal.fire({
+            title: "No ha ingresado datos",
+            text: "Ingrese datos y presione enviar, luego el ícono de guardar, para cargarlo a la base de datos",
+            icon: "error",
+            color: "white",
+            background: "#282C34",
+            confirmButtonText: "Aceptar",
+        });
+        validateFlag = false
+    } else if (validateFlag === true && localStorageExists("datesObject") === false) {
+        let createObjects = []
+        for (i = 0; i < dates.length; i++) {
+            createObjects.push({
+                "fila": dates[i].fila,
+                "apellido": dates[i].apellido,
+                "nombre": dates[i].nombre,
+                "dni": dates[i].dni,
+                "cantidad": dates[i].cantidad,
+                "inicio": dates[i].inicio,
+                "fin": dates[i].fin,
+                "reintegro": dates[i].reintegro,
+            })
+        };
+        newString = JSON.stringify(createObjects)
+        localStorage.setItem("datesObject",newString);
+        fechasCargadas.innerHTML = '';
+        dates.length = 0;
+    } else if (validateFlag === true && localStorageExists("datesObject") === true) {
+        for (i = 0; i < dates.length; i++) {
+            newObject.push({
+                "fila": dates[i].fila,
+                "apellido": dates[i].apellido,
+                "nombre": dates[i].nombre,
+                "dni": dates[i].dni,
+                "cantidad": dates[i].cantidad,
+                "inicio": dates[i].inicio,
+                "fin": dates[i].fin,
+                "reintegro": dates[i].reintegro,
+            })
+        };
+        newString = JSON.stringify(newObject);
+        localStorage.setItem("datesObject", newString);
+        fechasCargadas.innerHTML = '';
+        dates.length = 0;
+    };
+};
+
+function clear (e) {
+    e.preventDefault();
+
+    let fechasCargadas = document.getElementById("fecha");
+    localStorage.removeItem("datesObject");
+    fechasCargadas.innerHTML = '';
+
+    return dates.length = 0;
 };

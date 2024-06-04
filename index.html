@@ -9,9 +9,28 @@
 </head>
 <body>
     <section class="home-page-container">
-        <h1 id="titulo">Entrega final<br> Vizgarra Brian Marco</h1>
+        <nav class="navbar">
+            <div class="save_div">
+                <form id="save_form" class="nav_button">
+                    <button type="submit" name="save_button" id="save_btn" value="SAVE"></button>
+                    <div class="queonda"></div>
+                </form>
+            </div>
+    
+            <div class="search_local_storage">
+                <form id="search_storage_form" class="nav_button">
+                    <button type="submit" name="search_button" id="search_btn" value="SEARCH"></button>
+                </form>
+            </div>
 
-        <form id="form_fechas">
+            <div class="clear_div">
+                <form id="clear_local_storage" class="nav_button">
+                    <button type="submit" name="clear_button" id="clear_btn" value="CLEAR"></button>
+                </form>
+            </div>
+        </nav>
+                
+                <form id="form_fechas">
             <label for="apellido">APELLIDO</label>
                 <input id="apellido" class="dato_personal" type="text">
 
