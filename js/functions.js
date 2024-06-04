@@ -330,5 +330,14 @@ function searchStorage (e) {
         let objectLocalStorage = JSON.parse(localStorage.getItem("datesObject"));
         fechasCargadas.innerHTML = '';  
         arrayDOM(objectLocalStorage, header)
+    } else {
+        Swal.fire({
+            title: "No hay información cargada en la base de datos",
+            text: "Ingrese datos y presione enviar, luego el ícono de guardar, para cargarlo a la base de datos",
+            icon: "error",
+            color: "white",
+            background: "#282C34",
+            confirmButtonText: "Aceptar",
+        });
     }
 };
