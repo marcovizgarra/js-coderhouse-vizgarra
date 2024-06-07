@@ -13,7 +13,7 @@
 .home-page-container .navbar {
     width: 58%;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 .home-page-container .navbar .nav_button  {
@@ -22,45 +22,61 @@
     padding: 0;
 }
 
-/* Boton GUARDAR */
+/* Botones */
+
+.navbar_ul {
+    display: flex;
+    flex-direction: row;
+}
+
+.navbar_ul li:not(:first-child) {
+    margin-left: 80px;
+}
+
+.navbar_button a {
+    text-decoration: none;
+}
+
+.navbar_button {
+    padding-left: 35px;
+    padding-right: 1rem;
+    border: none;
+    background-color: #ffffff00;
+    border-radius: .2rem;
+    min-width: 75px;
+    min-height: 30px;
+    list-style: none;
+}
+
+.navbar_button:hover {
+    background-color: #3d3d3daf;
+}
+
 #save_btn { 
     background-image: url(../assets/img/floppy-disk-solid.svg);
-    background-color: #ffffff00;
     background-size: contain;
     background-repeat: no-repeat;
-    border: none;
-    width: 30px;
-    height: 30px;
 }
 
 #save_btn:hover { 
     background-image: url(../assets/img/floppy-disk-solid-hover.svg);
 }
 
-/* Boton MOSTRAR LOCAL STORAGE */
 #search_btn { 
-    background-image: url(../assets/img/searchengin.svg);
-    background-color: #ffffff00;
+    background-image: url(../assets/img/database-solid.svg);
     background-size: contain;
     background-repeat: no-repeat;
-    border: none;
-    width: 45px;
-    height: 45px;
 }
 
 #search_btn:hover { 
-    background-image: url(../assets/img/searchengin-hover.svg);
+    background-image: url(../assets/img/database-solid-hover.svg);
 }
 
 /* Boton BORRAR LOCAL STORAGE */
 #clear_btn { 
     background-image: url(../assets/img/trash-solid.svg);
-    background-color: #ffffff00;
     background-size: contain;
     background-repeat: no-repeat;
-    border: none;
-    width: 30px;
-    height: 30px;
 }
 
 #clear_btn:hover { 

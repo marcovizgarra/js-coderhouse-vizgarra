@@ -1,14 +1,17 @@
 let formularioFecha = document.getElementById("form_fechas");
 formularioFecha.onsubmit = validarFormulario;
 
-let btnSave = document.getElementById("save_form");
-btnSave.onsubmit = save;
+// let btnSave = document.getElementById("save_form");
+// btnSave.onsubmit = save;
 
-let btnClear = document.getElementById("clear_local_storage");
-btnClear.onsubmit = clear;
+let pruebaGuardar = document.getElementById("save_btn");
+pruebaGuardar.onclick = save;
 
-let btnSearchStorage = document.getElementById("search_storage_form");
-btnSearchStorage.onsubmit = searchStorage;
+let btnClear = document.getElementById("clear_btn");
+btnClear.onclick = clear;
+
+let btnSearchStorage = document.getElementById("search_btn");
+btnSearchStorage.onclick = searchStorage;
 
 const dates = [];
 const header = [

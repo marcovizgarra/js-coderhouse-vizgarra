@@ -267,7 +267,7 @@ function save (e) {
     if (dates.length === 0) {
         Swal.fire({
             title: "No ha ingresado datos",
-            text: "Ingrese datos y presione enviar, luego el ícono de guardar, para cargarlo a la base de datos",
+            text: "Complete los campos, presione enviar y luego el ícono de guardar para cargarlo a la base de datos",
             icon: "error",
             color: "white",
             background: "#282C34",
@@ -315,11 +315,44 @@ function save (e) {
 function clear (e) {
     e.preventDefault();
 
-    let fechasCargadas = document.getElementById("fecha");
-    localStorage.removeItem("datesObject");
-    fechasCargadas.innerHTML = '';
-
-    return dates.length = 0;
+    if (localStorageExists("datesObject") === false) {
+        Swal.fire({
+            title: "LA BASE DE DATOS ESTÁ VACÍA",
+            html: "No hay datos para eliminar",
+            icon: "error",
+            color: "white",
+            showConfirmButton: false,
+            background: "#282C34",
+            timer: 2000,
+        });
+    } else {
+        Swal.fire({
+            title: "ADVERTENCIA",
+            text: "Esta acción eliminará todos los datos almacenados en la base de datos y NO PUEDE REVERTIRSE",
+            icon: "warning",
+            color: "white",
+            background: "#282C34",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            cancelButtonText: "Cancelar",
+            confirmButtonText: "Borrar"
+          }).then((result) => {
+            if (result.isConfirmed) {
+              Swal.fire({
+                title: "Operación completada",
+                color: "white",
+                background: "#282C34",
+                text: "La base de datos ha sido eliminada",
+                icon: "success"
+              });
+              let fechasCargadas = document.getElementById("fecha");
+              localStorage.removeItem("datesObject");
+              fechasCargadas.innerHTML = '';
+              return dates.length = 0;
+            }
+          });
+    }
 };
 
 function searchStorage (e) {
