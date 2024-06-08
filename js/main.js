@@ -1,11 +1,11 @@
 let formularioFecha = document.getElementById("form_fechas");
 formularioFecha.onsubmit = validarFormulario;
 
-// let btnSave = document.getElementById("save_form");
-// btnSave.onsubmit = save;
+let btnCleanInputs = document.getElementById("clean_inputs");
+btnCleanInputs.onclick = cleanInputs;
 
-let pruebaGuardar = document.getElementById("save_btn");
-pruebaGuardar.onclick = save;
+let btnSave = document.getElementById("save_btn");
+btnSave.onclick = save;
 
 let btnClear = document.getElementById("clear_btn");
 btnClear.onclick = clear;

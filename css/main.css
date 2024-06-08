@@ -35,6 +35,7 @@
 
 .navbar_button a {
     text-decoration: none;
+    margin-left: .5rem;
 }
 
 .navbar_button {
@@ -43,40 +44,47 @@
     border: none;
     background-color: #ffffff00;
     border-radius: .2rem;
-    min-width: 75px;
-    min-height: 30px;
+    min-width: 5rem;
+    min-height: 35px;
+    width: max-content;
     list-style: none;
+    background-size: 1.4rem;
+    background-repeat: no-repeat;
+    background-position-y: center;
+    background-position-x: .8rem;
+    border: 1px solid #ffffff00;
 }
 
 .navbar_button:hover {
     background-color: #3d3d3daf;
+    border: 1px solid white;
+    border-radius: 2rem;
+    cursor: pointer;
 }
+
+/*Botón GUARDAR*/
 
 #save_btn { 
     background-image: url(../assets/img/floppy-disk-solid.svg);
-    background-size: contain;
-    background-repeat: no-repeat;
 }
 
 #save_btn:hover { 
     background-image: url(../assets/img/floppy-disk-solid-hover.svg);
 }
 
+/*Botón BUSCAR*/
 #search_btn { 
     background-image: url(../assets/img/database-solid.svg);
-    background-size: contain;
-    background-repeat: no-repeat;
 }
 
 #search_btn:hover { 
     background-image: url(../assets/img/database-solid-hover.svg);
 }
 
-/* Boton BORRAR LOCAL STORAGE */
+/*Botón ELIMINAR*/
+
 #clear_btn { 
     background-image: url(../assets/img/trash-solid.svg);
-    background-size: contain;
-    background-repeat: no-repeat;
 }
 
 #clear_btn:hover { 
@@ -91,13 +99,16 @@
 }
 
 .home-page-container {
-    background: linear-gradient(to top, #00000081, #00000094), url(../assets/img/background.jpg);
-    background-size:cover ;
+    background: linear-gradient(to top, #000000be, #000000be), url(../assets/img/background.jpg);
+    background-size: contain;
+    background-position: top;
+    background-repeat: no-repeat;
     background-color: #050113;
-    min-height: 100vh;
+    min-height: 100%;
     height: max-content;
-    width: 100vw;
-    padding: 1rem;
+    padding-top: 1rem;
+    min-width: 99.1vw;
+    min-height: 98.3vh;
     display: flex;
     flex-direction: column;
     justify-content: top;
@@ -122,6 +133,23 @@ input {
     background-color: #030f25;
 }
 
+#clean_inputs {
+    padding-bottom: .7rem;
+    margin-right: 2rem;
+    margin-left: .5rem;
+    width: 2rem;
+    height: 2rem;
+    background-color: #ffffff00;
+    border-style: none;
+    background-image: url(../assets/img/broom-solid.svg);
+    background-repeat: no-repeat;
+}
+
+#clean_inputs:hover {
+    background-image: url(../assets/img/broom-solid-hover.svg);
+    cursor: pointer;
+}
+
 .dato_personal {
     width: 7rem;
 }
@@ -131,6 +159,7 @@ input {
     height: 2.1rem;
     border-radius: .5rem;
     background-color: green;
+    cursor: pointer;
 }
 
 .btn_enviar:hover {

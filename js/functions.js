@@ -1,3 +1,11 @@
+function cleanInputs () {
+    formularioFecha.children[2].value = "";
+    formularioFecha.children[4].value = "";
+    formularioFecha.children[6].value = null;
+    formularioFecha.children[8].value = "";
+    formularioFecha.children[10].value = null;
+}
+
 function isPair (number) {
     return number % 2 === 0;
 };
@@ -118,14 +126,14 @@ function validarFormulario(e) {
     e.preventDefault();
 
     //Variables - datos personales
-    let inputDni = formularioFecha.children[5].value;
-    let last_name = (formularioFecha.children[1].value).toUpperCase();
-    let name = capitalizeString(formularioFecha.children[3].value);
+    let inputDni = formularioFecha.children[6].value;
+    let last_name = (formularioFecha.children[2].value).toUpperCase();
+    let name = capitalizeString(formularioFecha.children[4].value);
     let dni = (parseInt(inputDni)).toLocaleString('es-ES');
 
     //Variables - fechas
-    let inputBegin = formularioFecha.children[7].value;
-    let quantity = parseInt(formularioFecha.children[9].value);
+    let inputBegin = formularioFecha.children[8].value;
+    let quantity = parseInt(formularioFecha.children[10].value);
     let yearBegin = (new Date(inputBegin + "T00:00:00")).getFullYear();
     let dateBegin = formattedDate(inputBegin);
     let dateEnd = addDays(inputBegin, quantity - 1);
@@ -254,7 +262,6 @@ function validarFormulario(e) {
     };
 };
 
-//modificar para reducir lineas de código
 function save (e) {
     e.preventDefault();
 
