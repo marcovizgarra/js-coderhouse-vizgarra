@@ -1,0 +1,102 @@
+[
+    {
+        "fila": 1,
+        "apellido": "ALVAREZ",
+        "nombre": "Malena Cristina",
+        "dni": "20.669.887",
+        "cantidad": 15,
+        "inicio": "15/05/2024",
+        "fin": "29/05/2024",
+        "reintegro": "30/05/2024"
+    },
+    {
+        "fila": 2,
+        "apellido": "ALVAREZ",
+        "nombre": "Malena Cristina",
+        "dni": "20.669.887",
+        "cantidad": 5,
+        "inicio": "18/09/2024",
+        "fin": "22/09/2024",
+        "reintegro": "23/09/2024"
+    },
+    {
+        "fila": 3,
+        "apellido": "ALVAREZ",
+        "nombre": "Malena Cristina",
+        "dni": "20.669.887",
+        "cantidad": 5,
+        "inicio": "20/11/2024",
+        "fin": "24/11/2024",
+        "reintegro": "25/11/2024"
+    },
+    {
+        "fila": 4,
+        "apellido": "REINOSO",
+        "nombre": "Juan Ignacio",
+        "dni": "45.887.412",
+        "cantidad": 7,
+        "inicio": "11/02/2024",
+        "fin": "17/02/2024",
+        "reintegro": "18/02/2024"
+    },
+    {
+        "fila": 5,
+        "apellido": "REINOSO",
+        "nombre": "Juan Ignacio",
+        "dni": "45.887.412",
+        "cantidad": 7,
+        "inicio": "05/09/2024",
+        "fin": "11/09/2024",
+        "reintegro": "12/09/2024"
+    },
+    {
+        "fila": 6,
+        "apellido": "BARROS",
+        "nombre": "Sebastián Ezequiel",
+        "dni": "41.498.743",
+        "cantidad": 10,
+        "inicio": "22/02/2024",
+        "fin": "02/03/2024",
+        "reintegro": "03/03/2024"
+    },
+    {
+        "fila": 7,
+        "apellido": "BARROS",
+        "nombre": "Sebastián Ezequiel",
+        "dni": "41.498.743",
+        "cantidad": 20,
+        "inicio": "02/12/2024",
+        "fin": "21/12/2024",
+        "reintegro": "22/12/2024"
+    },
+    {
+        "fila": 8,
+        "apellido": "PESTELLI",
+        "nombre": "Matias Leonel",
+        "dni": "39.874.122",
+        "cantidad": 15,
+        "inicio": "05/05/2024",
+        "fin": "19/05/2024",
+        "reintegro": "20/05/2024"
+    },
+    {
+        "fila": 9,
+        "apellido": "PESTELLI",
+        "nombre": "Matias Leonel",
+        "dni": "39.874.122",
+        "cantidad": 15,
+        "inicio": "10/11/2024",
+        "fin": "24/11/2024",
+        "reintegro": "25/11/2024"
+    },
+    {
+        "fila": 10,
+        "apellido": "DONATELLO",
+        "nombre": "Marco Daniel",
+        "dni": "22.557.822",
+        "cantidad": 30,
+        "inicio": "10/12/2024",
+        "fin": "08/01/2025",
+        "reintegro": "09/01/2025"
+    }
+]

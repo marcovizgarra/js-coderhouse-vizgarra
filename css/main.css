@@ -9,7 +9,6 @@
     color: white;    
 }
 
-
 .home-page-container .navbar {
     width: 58%;
     display: flex;
@@ -26,6 +25,7 @@
 
 .navbar_ul {
     display: flex;
+    color: #a01313;
     flex-direction: row;
 }
 
@@ -73,6 +73,7 @@
 }
 
 /*Botón BUSCAR*/
+
 #search_btn { 
     background-image: url(../assets/img/database-solid.svg);
 }
@@ -87,8 +88,67 @@
     background-image: url(../assets/img/trash-solid.svg);
 }
 
+/*Botón para vaciar campos*/
+
 #clear_btn:hover { 
     background-image: url(../assets/img/trash-solid-hover.svg);
+}
+
+/*Boton para vaciar inputs*/
+
+#clean_inputs {
+    padding-bottom: .7rem;
+    margin-right: 2rem;
+    margin-left: .5rem;
+    width: 2rem;
+    height: 2rem;
+    background-color: #ffffff00;
+    border-style: none;
+    background-image: url(../assets/img/broom-solid.svg);
+    background-repeat: no-repeat;
+}
+
+#clean_inputs:hover {
+    background-image: url(../assets/img/broom-solid-hover.svg);
+    cursor: pointer;
+}
+
+/*Botón para vaciar vista de tablas*/
+
+#clean_view {
+    padding-bottom: .7rem;
+    margin-right: 1rem;
+    margin-left: .5rem;
+    width: 2rem;
+    height: 2rem;
+    background-color: #ffffff00;
+    border-style: none;
+    background-image: url(../assets/img/delete-left-solid.svg);
+    background-repeat: no-repeat;
+}
+
+#clean_view:hover {
+    background-image: url(../assets/img/delete-left-solid-hover.svg);
+    cursor: pointer;
+}
+
+/*Botón para ver datos en array dates*/
+
+#view_dates_array {
+    padding-bottom: .8rem;
+    margin-right: 1.5rem;
+    width: 2rem;
+    height: 2rem;
+    background-color: #ffffff00;
+    border-style: none;
+    background-image: url(../assets/img/eye-regular.svg);
+    background-repeat: no-repeat;
+    background-size: 1.6rem;
+}
+
+#view_dates_array:hover {
+    background-image: url(../assets/img/eye-regular-hover.svg);
+    cursor: pointer;
 }
 
 .alert_span {
@@ -133,23 +193,6 @@ input {
     background-color: #030f25;
 }
 
-#clean_inputs {
-    padding-bottom: .7rem;
-    margin-right: 2rem;
-    margin-left: .5rem;
-    width: 2rem;
-    height: 2rem;
-    background-color: #ffffff00;
-    border-style: none;
-    background-image: url(../assets/img/broom-solid.svg);
-    background-repeat: no-repeat;
-}
-
-#clean_inputs:hover {
-    background-image: url(../assets/img/broom-solid-hover.svg);
-    cursor: pointer;
-}
-
 .dato_personal {
     width: 7rem;
 }
@@ -187,10 +230,31 @@ input {
     display: flex;
     width: 70%;
     flex-direction: column;
-    background-color: #3d3d3d;
+    background-color: #00000000;
     justify-content: center;
     border-radius: .5rem;
     margin: 1rem;
+}
+
+.home-page-container .fecha .ejemplos_H2 {
+    background-color: #222222;
+    color: orange;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+}
+
+.home-page-container .fecha .elementos_insertados {
+    background-color: #222222;
+    color: greenyellow;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+}
+
+.home-page-container .fecha .elementos_almacenados {
+    background-color: #222222;
+    color: #6097ff;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
 }
 
 .home-page-container #form_fechas .dato_personal {

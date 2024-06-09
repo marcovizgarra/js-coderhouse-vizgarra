@@ -13,16 +13,11 @@ btnClear.onclick = clear;
 let btnSearchStorage = document.getElementById("search_btn");
 btnSearchStorage.onclick = searchStorage;
 
-const dates = [];
-const header = [
-    {
-        "ord": "ORD",
-        "last_name": "APELLIDO",
-        "name": "NOMBRE",
-        "dni": "DNI",
-        "quantity": "CANTIDAD",
-        "begin": "INICIO",
-        "end": "FIN",
-        "reinstatement": "REINTEGRO",
-    }
-]
+let btnExampleList = document.getElementById("example_btn");
+btnExampleList.onclick = exampleList;
+
+let btnViewDatesArray = document.getElementById("view_dates_array");
+btnViewDatesArray.onclick = viewDatesArray;
+
+let btnCleanView = document.getElementById("clean_view");
+btnCleanView.onclick = cleanView;

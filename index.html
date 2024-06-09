@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <link rel="stylesheet" href="./css/main.css">
     <link rel="shortcut icon" href="./assets/img/javascript-logo.png">
     <title>Pre entrega 3</title>
@@ -14,6 +15,7 @@
                 <li id="save_btn" class="navbar_button"><a href="#">Guardar</a></li>
                 <li id="search_btn" class="navbar_button"><a href="#">Buscar</a></li>
                 <li id="clear_btn" class="navbar_button"><a href="#">Eliminar todo</a></li>
+                <li id="example_btn" class="navbar_button"><a href="#">EJEMPLO</a></li>
             </ul>
         </nav>
                 
@@ -36,15 +38,17 @@
                 <input id="cantidad" class="cantidad" type="number">
             
                 <input id="btn_enviar_1" class="btn_enviar" type="submit" value="Enviar">
+            
+            <button id="clean_view" type="button" title="Vaciar vista"></button>
+            <button id="view_dates_array" type="button" title="Visualizar datos pendientes de ser guardados"></button>
         </form>
 
         <div id="fecha" class="fecha">
-            <div class="contenedor_objeto">
-                
-            </div>
+           
         </div>
     </section>
 
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./js/functions.js"></script>
     <script src="./js/main.js"></script>

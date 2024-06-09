@@ -1,3 +1,17 @@
+const dates = [];
+const header = [
+    {
+        "ord": "ORD",
+        "last_name": "APELLIDO",
+        "name": "NOMBRE",
+        "dni": "DNI",
+        "quantity": "CANTIDAD",
+        "begin": "INICIO",
+        "end": "FIN",
+        "reinstatement": "REINTEGRO",
+    }
+]
+
 function cleanInputs () {
     formularioFecha.children[2].value = "";
     formularioFecha.children[4].value = "";
@@ -5,6 +19,11 @@ function cleanInputs () {
     formularioFecha.children[8].value = "";
     formularioFecha.children[10].value = null;
 }
+
+function cleanView () {
+    let fechasCargadas = document.getElementById("fecha");
+    fechasCargadas.innerHTML = '';
+};
 
 function isPair (number) {
     return number % 2 === 0;
@@ -36,6 +55,48 @@ function capitalizeString(string) {
 
     let newString = stringUpperCase.join(" ");
     return newString
+};
+
+function exampleList () {
+    fetch('./assets/json/example_list.json')
+        .then(function(res) {
+            return res.json();
+        })
+        .then(function(data){
+            arrayDOM(data, header);
+
+            const divFecha = document.getElementById("fecha");
+            const newH2 = document.createElement("h2");
+            newH2.classList.add("ejemplos_H2");
+            newH2.textContent = "Lista de ejemplos";
+            divFecha.insertBefore(newH2, divFecha.firstChild);      
+        })
+};
+
+function viewDatesArray () {
+    const divFecha = document.getElementById("fecha");
+    const newH2 = document.createElement("h2");
+
+    if (dates.length === 0) {
+        Toastify({
+            text: "No hay elementos para mostrar, complete los datos y presione enviar",
+            position: "center",
+            gravity: "bottom",
+            duration: 6000,
+            style: {
+                background: "#a01313",
+            }
+        }).showToast();
+    } else {
+        arrayDOM(dates, header);
+
+        newH2.classList.add("elementos_insertados");
+        newH2.textContent = "Presione GUARDAR para almacenar los elementos insertados";
+        divFecha.insertBefore(newH2, divFecha.firstChild);  
+    };
+
+
+    
 };
 
 function addDays (date, add) {
@@ -106,6 +167,7 @@ function arrayDOM(array, headerArray) {
         const div_contenedor = document.createElement("div");
         div_contenedor.classList.add("contenedor_objeto");
 
+        let isFirstKey = true;
         for (const key in object) {
             const p = document.createElement("p");
             if (isPair(index) === true) {
@@ -113,8 +175,13 @@ function arrayDOM(array, headerArray) {
             } else {
                 p.classList.add("item_object", "odds")
             }
-            p.textContent = `${object[key]}`;
-        
+
+            if (isFirstKey) {
+                p.textContent = `${index+1}`;
+                isFirstKey = false;
+            } else {
+                p.textContent = `${object[key]}`;
+            }     
             div_contenedor.appendChild(p);
         }
 
@@ -138,11 +205,15 @@ function validarFormulario(e) {
     let dateBegin = formattedDate(inputBegin);
     let dateEnd = addDays(inputBegin, quantity - 1);
     let dateReinstatament = formattedDate(addDays(dateEnd, 1));
-    let idFile = dates.length + 1;
+    let idFile = 0;
     dateEnd = formattedDate(dateEnd);
 
     //Variable - Objeto en localStorge
     let objectLocalStorage = JSON.parse(localStorage.getItem("datesObject"));
+
+    //Variables para mostrar datos insertados
+    const divFecha = document.getElementById("fecha");
+    const newH2 = document.createElement("h2");
 
     let inputValidated = null;
     let newEntry = {
@@ -220,6 +291,10 @@ function validarFormulario(e) {
         if (localStorageExists("datesObject") === false && dates.length === 0) {
             dates.push(newEntry);
             arrayDOM(dates, header)
+            
+            newH2.classList.add("elementos_insertados");
+            newH2.textContent = "Presione GUARDAR para almacenar los elementos insertados";
+            divFecha.insertBefore(newH2, divFecha.firstChild);  
         } else {
             if (dates.length >= 0) {
                 flagDatesArray = objectDuplicated(dates, newEntry);
@@ -259,6 +334,10 @@ function validarFormulario(e) {
     if (flagDatesArray === false && flagLocalStorage === false) {
         dates.push(newEntry);
         arrayDOM(dates, header)
+
+        newH2.classList.add("elementos_insertados");
+        newH2.textContent = "Presione GUARDAR para almacenar los elementos insertados";
+        divFecha.insertBefore(newH2, divFecha.firstChild);  
     };
 };
 
@@ -299,6 +378,16 @@ function save (e) {
         localStorage.setItem("datesObject",newString);
         fechasCargadas.innerHTML = '';
         dates.length = 0;
+        
+        Toastify({
+            text: "Guardado exitosamente",
+            position: "center",
+            gravity: "bottom",
+            duration: 3000,
+            style: {
+                background: "green",
+            }
+        }).showToast();
     } else if (validateFlag === true && localStorageExists("datesObject") === true) {
         for (i = 0; i < dates.length; i++) {
             newObject.push({
@@ -316,6 +405,16 @@ function save (e) {
         localStorage.setItem("datesObject", newString);
         fechasCargadas.innerHTML = '';
         dates.length = 0;
+
+        Toastify({
+            text: "Guardado exitosamente",
+            position: "center",
+            gravity: "bottom",
+            duration: 3000,
+            style: {
+                background: "green",
+            }
+        }).showToast();
     };
 };
 
@@ -365,11 +464,20 @@ function clear (e) {
 function searchStorage (e) {
     e.preventDefault();
 
+    const divFecha = document.getElementById("fecha");
+    const newH2 = document.createElement("h2");
+
     let fechasCargadas = document.getElementById("fecha");
     if (localStorageExists("datesObject") === true) {
         let objectLocalStorage = JSON.parse(localStorage.getItem("datesObject"));
         fechasCargadas.innerHTML = '';  
         arrayDOM(objectLocalStorage, header)
+
+        newH2.classList.add("elementos_almacenados");
+        newH2.textContent = "datos almacenados en la base de datos";
+        divFecha.insertBefore(newH2, divFecha.firstChild);  
+    
+
     } else {
         Swal.fire({
             title: "No hay información cargada en la base de datos",
