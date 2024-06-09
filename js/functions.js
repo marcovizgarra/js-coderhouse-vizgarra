@@ -31,7 +31,7 @@ function infoBtn() {
     Una vez rellenados los campos al presionar el botón <span class="enviar_info">ENVIAR</span> se realizará la insersión de los datos.<br><br>
     Para almacenar en la base de datos la información insertada, presionar el botón <span class="enviar_info">GUARDAR</span><br><br>
 
-    Una vez almacenados los datos se pueden visualizar con el botón <span class="buscar_info">BUSCAR</span>.
+    Una vez almacenados los datos se pueden visualizar con el botón <span class="buscar_info">BUSCAR</span>.<br><br>
     
     El botón <span class="eliminar_info">ELIMINAR TODO</span> vacía la base de datos por completo, y NO ES POSIBLE REVERTIR ESA ACCIÓN<br><br>
 
