@@ -10,9 +10,9 @@
 }
 
 .home-page-container .navbar {
-    width: 58%;
+    width: 68%;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
 }
 
 .home-page-container .navbar .nav_button  {
@@ -24,6 +24,12 @@
 /* Botones */
 
 .navbar_ul {
+    display: flex;
+    color: #a01313;
+    flex-direction: row;
+}
+
+.navbar-info {
     display: flex;
     color: #a01313;
     flex-direction: row;
@@ -60,6 +66,26 @@
     border: 1px solid white;
     border-radius: 2rem;
     cursor: pointer;
+}
+
+.div_alert_info {
+    text-align: left;
+}
+
+.alert_info {
+    color: rgb(0, 225, 255);
+}
+
+.eliminar_info {
+    color: red;
+}
+
+.enviar_info {
+    color: greenyellow;
+}
+
+.buscar_info {
+    color: #6097ff;
 }
 
 /*Botón GUARDAR*/
@@ -150,6 +176,39 @@
     background-image: url(../assets/img/eye-regular-hover.svg);
     cursor: pointer;
 }
+
+/*Botón INFO*/
+#info_btn {
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff00;
+    width: 2.5rem;
+    border-style: none;
+    background-image: url(../assets/img/circle-question-solid.svg);
+    background-repeat: no-repeat;
+    background-size: 1.6rem;
+}
+
+#info_btn:hover {
+    background-image: url(../assets/img/circle-question-solid-hover.svg);
+}   
+
+/*Botón tabla de EJEMPLO*/
+#example_btn {
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff00;
+    width: 2.5rem;
+    border-style: none;
+
+    background-repeat: no-repeat;
+    background-size: 1.6rem;
+}
+
+#example_btn a:hover {
+    color: orange;
+    font-weight: bold;
+}   
 
 .alert_span {
     text-transform: uppercase;

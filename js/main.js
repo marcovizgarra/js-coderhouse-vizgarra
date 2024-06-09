@@ -1,6 +1,9 @@
 let formularioFecha = document.getElementById("form_fechas");
 formularioFecha.onsubmit = validarFormulario;
 
+let btnInfo = document.getElementById("info_btn");
+btnInfo.onclick = infoBtn;
+
 let btnCleanInputs = document.getElementById("clean_inputs");
 btnCleanInputs.onclick = cleanInputs;
 

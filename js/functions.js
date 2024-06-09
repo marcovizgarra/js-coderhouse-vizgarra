@@ -12,6 +12,43 @@ const header = [
     }
 ]
 
+function infoBtn() {
+    Swal.fire({
+        title: "<strong>Bienvenido a <u>Gestor de Licencias</u></strong>",
+        icon: "info",
+        color: "white",
+        background: "#282C34",
+        html: `
+    <h3><b><span class="alert_info">Cómo cargar una licencia:</span></b><br></h3>
+    <div class="div_alert_info">
+    Para cargar licencias es necesario rellenar todos los campos, teniendo en cuenta que:<br>
+    • No pueden exceder los 30 días<br>
+    • El mínimo permitido es al menos 1 (un) día de licencia<br>
+    • No se podrán ingresar fechas ni DNI inválidos/ incorrectos<br>
+    • No es posible insertar filas sin rellenar todos los campos<br>
+    • No es posible insertar filas o datos repetidos<br><br>
+    
+    Una vez rellenados los campos al presionar el botón <span class="enviar_info">ENVIAR</span> se realizará la insersión de los datos.<br><br>
+    Para almacenar en la base de datos la información insertada, presionar el botón <span class="enviar_info">GUARDAR</span><br><br>
+
+    Una vez almacenados los datos se pueden visualizar con el botón <span class="buscar_info">BUSCAR</span>.
+    
+    El botón <span class="eliminar_info">ELIMINAR TODO</span> vacía la base de datos por completo, y NO ES POSIBLE REVERTIR ESA ACCIÓN<br><br>
+
+    Próximamente se agregarán más funcionalidades como buscar por DNI y validaciones para no otorgar más de 30 días por persona.
+    </div>
+    `,
+        showCloseButton: true,
+        showCancelButton: false,
+        focusConfirm: false,
+        confirmButtonText: `
+    <i class="fa fa-thumbs-up"></i> Entendido!
+  `,
+        confirmButtonAriaLabel: "Thumbs up, great!",
+        
+    });
+};
+
 function cleanInputs () {
     formularioFecha.children[2].value = "";
     formularioFecha.children[4].value = "";
@@ -476,8 +513,6 @@ function searchStorage (e) {
         newH2.classList.add("elementos_almacenados");
         newH2.textContent = "datos almacenados en la base de datos";
         divFecha.insertBefore(newH2, divFecha.firstChild);  
-    
-
     } else {
         Swal.fire({
             title: "No hay información cargada en la base de datos",
